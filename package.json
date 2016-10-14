@@ -21,11 +21,12 @@
     "jquery": "^2.2.1",
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
-    "react-addons-test-utils": "^0.14.7",
+    "react-addons-test-utils": "^15.3.2",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "axios": "^0.15.0",
     "babel-preset-stage-1": "^6.16.0",
     "lodash": "^4.16.4",
     "node-env-file": "^0.1.8",

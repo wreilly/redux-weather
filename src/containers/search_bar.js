@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../actions/index';
 
-const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
+// const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
 
 // Yes. Working. :o)
 console.log("WR__ 00  src/containers/search_bar.js process.env.OPENWEATHER_API_KEY: ", process.env.OPENWEATHER_API_KEY);
 
-export default class SearchBar extends Component {
+// export default class SearchBar extends Component {
+class SearchBar extends Component {
 
 
 
@@ -32,6 +36,8 @@ export default class SearchBar extends Component {
     */
     this.onInputChange = this.onInputChange.bind(this);
 
+// undle.js:23953 Uncaught TypeError: Cannot read property 'props' of null
+    this.onFormSubmit = this.onFormSubmit.bind(this);
 
   }
 
@@ -98,7 +104,9 @@ export default class SearchBar extends Component {
     event.preventDefault();
 
     // we need to go FETCH WEATHER DATA...
-
+    this.props.fetchWeather(this.state.term);
+    // Clear the input field after search...
+    this.setState({ term: '' });
   }
 
 
@@ -130,3 +138,10 @@ export default class SearchBar extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchWeather }, dispatch);
+}
+
+// that null is because we have no mapStateToProps here.
+export default connect(null, mapDispatchToProps)(SearchBar);
