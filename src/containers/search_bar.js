@@ -17,7 +17,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { term: '' }; // search term
+    this.state = { term: '' }; // search term, to begin
 
     /* BIND BIZ
     'Splainin': 8:30~
@@ -37,6 +37,7 @@ class SearchBar extends Component {
     this.onInputChange = this.onInputChange.bind(this);
 
 // undle.js:23953 Uncaught TypeError: Cannot read property 'props' of null
+// That is, we needed to add this line:
     this.onFormSubmit = this.onFormSubmit.bind(this);
 
   }
@@ -74,18 +75,14 @@ class SearchBar extends Component {
   onInputChange = ( event ) => {
     console.log("WR__ onInputChange - event.target.value: ", event.target.value);
 
-
     // Yes. Working. :o)
     // console.log("WR__ 01 src/containers/search_bar.js OPENWEATHER_API_KEY: ", OPENWEATHER_API_KEY);
-
-
-
 
     this.setState({ term: event.target.value});
   }
 
 
-  /* N.B. The adding of this attribute ('value') to the input element, apparently turns this into a "controlled" component.
+  /* N.B. The adding, down below, of this attribute ('value') to the input element (inside the render()), apparently turns this whole component into a "controlled" component.
   The input form field will then not allow any typing, no change.
   Why?
   I think it's because React has taken over the input field. It won't show a value till the full React cycle etc. provides the value.

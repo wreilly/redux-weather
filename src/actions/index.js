@@ -9,15 +9,13 @@ const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${OPENWE
 
 export const FETCH_WEATHER = 'FETCH_WEATHER';
 
-const city = 'Cambridge';
-
 export function fetchWeather(city) {
   const url = `${ROOT_URL}&q=${city},us&units=imperial`;
 
   // returns a PROMISE
   const response = axios.get(url);
 
-  console.log("WR__ axios.get(url) response: ", response);
+  console.log("WR__ ACTION axios.get(url) response: ", response);
 
   return {
     type: FETCH_WEATHER,
