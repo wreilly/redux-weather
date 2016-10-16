@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Chart from '../components/chart';
+import GMap from '../components/google_map';
 
 // Re-factoring out of weather_list.js WeatherList class container ...
 // ... over into new chart.js stateless functional component
@@ -49,6 +50,14 @@ class WeatherList extends Component {
     const pressures = cityData.list.map( weather => weather.main.pressure );
     const humidities = cityData.list.map( weather => weather.main.humidity );
 
+    // ES5:
+    // const lon = cityData.city.coord.lon;
+    // const lat = cityData.city.coord.lat;
+
+    // ES6 destructuring:
+    const { lon, lat } = cityData.city.coord;
+
+
     console.log("WR__ TEMPS! ", temps);
 
 /*
@@ -62,7 +71,9 @@ Oy!
 
     return (
       <tr key={cityName}>
-        <td>{cityName}</td>
+        <td>{cityName}
+          <GMap lat={lat} lon={lon} />
+        </td>
         <td>
 {/*
 // Re-factoring out of weather_list.js WeatherList class container ...
