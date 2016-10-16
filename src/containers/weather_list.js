@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Sparklines, SparklinesLine } from 'react-sparklines';
+import Chart from '../components/chart';
+
+// Re-factoring out of weather_list.js WeatherList class container ...
+// ... over into new chart.js stateless functional component
+// import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 // export default class WeatherList extends Component {
 class WeatherList extends Component {
@@ -41,7 +45,9 @@ class WeatherList extends Component {
     // Works va bene ;)
     // const temps = cityData.list.map((weather) => weather.main.temp )
 
-    const temps = cityData.list.map( weather => weather.main.temp )
+    const temps = cityData.list.map( weather => weather.main.temp );
+    const pressures = cityData.list.map( weather => weather.main.pressure );
+    const humidities = cityData.list.map( weather => weather.main.humidity );
 
     console.log("WR__ TEMPS! ", temps);
 
@@ -58,9 +64,21 @@ Oy!
       <tr key={cityName}>
         <td>{cityName}</td>
         <td>
-          <Sparklines height={120} width={180} data={temps}>
-            <SparklinesLine color="red" />
-          </Sparklines>
+{/*
+// Re-factoring out of weather_list.js WeatherList class container ...
+// ... over into new chart.js stateless functional component
+          // <Sparklines height={120} width={180} data={temps}>
+          //   <SparklinesLine color="red" />
+          // </Sparklines>
+          // Now we pass in temps and a color:
+*/}
+          <Chart data={temps} color="orange" units="F" />
+        </td>
+        <td>
+          <Chart data={pressures} color="blue" units="hPa" />
+        </td>
+        <td>
+          <Chart data={humidities} color="gray" units="%" />
         </td>
       </tr>
     );
@@ -72,9 +90,9 @@ Oy!
         <thead>
           <tr>
             <th>City!</th>
-            <th>Temperature!</th>
-            <th>Pressure!</th>
-            <th>Humidity!</th>
+            <th>Temperature! (F)</th>
+            <th>Pressure! (hPa)</th>
+            <th>Humidity! (%)</th>
           </tr>
         </thead>
         <tbody>
